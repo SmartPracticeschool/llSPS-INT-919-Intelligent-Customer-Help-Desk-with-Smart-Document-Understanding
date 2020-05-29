@@ -1,0 +1,419 @@
+{
+  "intents": [
+    {
+      "intent": "product",
+      "examples": [
+        {
+          "text": "how to set time?"
+        },
+        {
+          "text": "how to set time"
+        },
+        {
+          "text": "how to turn on heater?"
+        },
+        {
+          "text": "how to access settings?"
+        },
+        {
+          "text": "how to turn on heater"
+        },
+        {
+          "text": "how to access settings"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "bye",
+      "examples": [
+        {
+          "text": "bye"
+        },
+        {
+          "text": "see ya"
+        },
+        {
+          "text": "goodbye"
+        },
+        {
+          "text": "good bye"
+        },
+        {
+          "text": "love ya"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "Good evening"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hola"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "Good morning"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "greetings",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "gm",
+            "gud mrg",
+            "mrg",
+            "morning"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good evening",
+          "synonyms": [
+            "evening"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good afternoon",
+          "synonyms": [
+            "afternoon"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "bye",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "thank you",
+          "synonyms": [
+            "thanks",
+            "thank",
+            "thankyou",
+            "congratulations",
+            "appreciate",
+            "thanx",
+            "yeah",
+            "congrats",
+            "wonderful"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "see ya",
+          "synonyms": [
+            "fairwell"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "goodbye",
+          "synonyms": [
+            "cioa"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/pateldirgh%40gmail.com_dev/default/Myaction.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Your welcome. Happy to help, always ;)"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1590684849996",
+      "conditions": "@bye:(thank you)",
+      "dialog_node": "response_1_1590685094863",
+      "previous_sibling": "response_10_1590685064736"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Nice! to see you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1590684849996",
+      "conditions": "@bye:(goodbye)",
+      "dialog_node": "response_6_1590685028095",
+      "previous_sibling": "response_7_1590686092293"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "It was a pleasure to help you."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1590684849996",
+      "conditions": "@bye:(see ya)",
+      "dialog_node": "response_10_1590685064736",
+      "previous_sibling": "response_6_1590685028095"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Until we speak again. Thanks for compliment. you are the mind beneath my wings."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_2_1590684849996",
+      "conditions": "#bye",
+      "dialog_node": "response_7_1590686092293"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "good afternoonhow can i help you ?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1590578830441",
+      "conditions": "@greetings:(good afternoon)",
+      "dialog_node": "response_9_1590579911510",
+      "previous_sibling": "response_6_1590579463140"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "What can i do for you?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1590578830441",
+      "conditions": "#greetings",
+      "dialog_node": "response_4_1590579957376",
+      "previous_sibling": "response_9_1590579911510"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Ask me anything you need?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1590578830441",
+      "conditions": "anything_else",
+      "dialog_node": "response_4_1590580029819",
+      "previous_sibling": "response_4_1590579957376"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "good morning how can i help you ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1590578830441",
+      "conditions": "@greetings:(good morning)",
+      "dialog_node": "response_6_1590579463140"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "\"<?$webhook_result_1.passages[0].passage_text?>\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1590648199323",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_7_1590648308614"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1590684849996",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#product",
+      "dialog_node": "node_10_1590648199323",
+      "previous_sibling": "node_7_1590578830441"
+    },
+    {
+      "type": "standard",
+      "title": "greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings || @greetings",
+      "dialog_node": "node_7_1590578830441",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "bye",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@bye || #bye",
+      "dialog_node": "node_2_1590684849996",
+      "previous_sibling": "node_10_1590648199323"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Customer_care",
+  "language": "en",
+  "description": ""
+}

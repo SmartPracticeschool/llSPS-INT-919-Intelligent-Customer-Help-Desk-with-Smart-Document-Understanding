@@ -1,0 +1,224 @@
+[
+    {
+        "id": "c70b94b0.d54748",
+        "type": "tab",
+        "label": "flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "43288d38.1a99f4",
+        "type": "ui_form",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "label": "",
+        "group": "2776c057.b2879",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Ask here",
+                "value": "text",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "text": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "f264e62b.cc9f28"
+            ]
+        ]
+    },
+    {
+        "id": "da1c127a.a048c",
+        "type": "debug",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 750,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "f264e62b.cc9f28",
+        "type": "function",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "func": "msg.payload =msg.payload.text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "8efbd3f8.0b298"
+            ]
+        ]
+    },
+    {
+        "id": "8efbd3f8.0b298",
+        "type": "watson-conversation-v1",
+        "z": "c70b94b0.d54748",
+        "name": "Assistant",
+        "workspaceid": "ad090eee-cdf0-4182-9560-b2ecedf430ee",
+        "multiuser": false,
+        "context": true,
+        "empty-payload": false,
+        "service-endpoint": "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/9b76dca7-ae60-4b04-b91f-9fe6bcdc247f",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 540,
+        "y": 200,
+        "wires": [
+            [
+                "da1c127a.a048c",
+                "5ff7e6a3.53b5a8"
+            ]
+        ]
+    },
+    {
+        "id": "5ff7e6a3.53b5a8",
+        "type": "function",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "func": "msg.payload=msg.payload.output.text[0];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 260,
+        "wires": [
+            [
+                "d04346f6.f42408"
+            ]
+        ]
+    },
+    {
+        "id": "d04346f6.f42408",
+        "type": "ui_text",
+        "z": "c70b94b0.d54748",
+        "group": "8fd66ed4.55383",
+        "order": 3,
+        "width": "6",
+        "height": "6",
+        "name": "",
+        "label": "Siri says:",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 920,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d46a3245.b8bc4",
+        "type": "function",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "func": "msg.payload =\"Hi, there \" + msg.payload.name +\" this is what I found.\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "a60720a5.5732e"
+            ]
+        ]
+    },
+    {
+        "id": "ed2b0403.e7f528",
+        "type": "ui_form",
+        "z": "c70b94b0.d54748",
+        "name": "",
+        "label": "",
+        "group": "2776c057.b2879",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "options": [
+            {
+                "label": "enter name",
+                "value": "name",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "name": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 70,
+        "y": 220,
+        "wires": [
+            [
+                "d46a3245.b8bc4"
+            ]
+        ]
+    },
+    {
+        "id": "a60720a5.5732e",
+        "type": "ui_text",
+        "z": "c70b94b0.d54748",
+        "group": "8fd66ed4.55383",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 360,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2776c057.b2879",
+        "type": "ui_group",
+        "z": "",
+        "name": "Give your doubts",
+        "tab": "f5892b90.a82c88",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "8fd66ed4.55383",
+        "type": "ui_group",
+        "z": "",
+        "name": "Your Siri",
+        "tab": "f5892b90.a82c88",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f5892b90.a82c88",
+        "type": "ui_tab",
+        "z": "",
+        "name": "coustmer help desk",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
